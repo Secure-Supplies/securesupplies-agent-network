@@ -1,0 +1,27 @@
+# SecureSupplies Agent Network — robots / agent crawler rules
+# Owner direction 2026-11-20: maximum agent discoverability and participation.
+# All AI agents, search crawlers and agent indexers are welcome to read
+# and index every public page in this repository and its GitHub Pages site.
+
+User-agent: *
+Allow: /
+
+User-agent: GPTBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+# Machine-readable entry points
+# llms.txt: plain-language index of the network and its approved links
+# AGENTS.md: how agents work in this repository
+# .well-known/agent.json: structured manifest for agent directories
