@@ -1,0 +1,36 @@
+name: Weekly link check
+
+# Checks the approved links (docs/../README.md "Approved links") and the
+# internal links across the repository's Markdown files once a week.
+# This workflow only reports broken links — it never publishes,
+# commits or changes anything.
+
+on:
+  schedule:
+    # Mondays 06:17 UTC
+    - cron: "17 6 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  link-check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Check links with lychee
+        uses: lycheeverse/lychee-action@v2
+        with:
+          # README.md carries the approved external links; docs/ and the
+          # templates carry the internal cross-references.
+          args: >-
+            --no-progress
+            --max-retries 2
+            --timeout 20
+            "README.md" "llms.txt" "docs/**/*.md" "agents/**/*.md" "i18n/**/*.md"
+          fail: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
